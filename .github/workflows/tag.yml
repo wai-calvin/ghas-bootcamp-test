@@ -26,13 +26,13 @@ jobs:
           RELEASE_VERSION: ${{ steps.tags.outputs.tag }}
         run: |
           echo $RELEASE_VERSION
-          echo ${{ steps.vars.outputs.tag }}
+          echo ${{ steps.tags.outputs.tag }}
 
       - name: Set Tag 
         id: patch
         run: |
           re="/(\d+)\D*\z"
-          tag=${{ steps.vars.outputs.tag }}
+          tag=${{ steps.tags.outputs.tag }}
           if 
             [[ $tag =~ $re ]]; 
             then echo ${BASH_REMATCH[1]}; 
