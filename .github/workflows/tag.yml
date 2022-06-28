@@ -27,8 +27,9 @@ jobs:
         id: patch
         run: |
           re="/(\d+)\D*\z"
+          tag=${{ steps.vars.outputs.tag }}
           if 
-            [[ ${{ steps.vars.outputs.tag }} =~ $re ]]; 
+            [[ $tag =~ $re ]]; 
             then echo ${BASH_REMATCH[1]}; 
           fi
 
