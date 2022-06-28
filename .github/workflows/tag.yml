@@ -34,7 +34,7 @@ jobs:
       - name: Set Tag 
         id: patch
         run: |
-          re="/(\d+)\D*\z"
+          re="/([0-9]+)\D*\z"
           tag="${{ steps.tags.outputs.tag }}"
           if 
             [[ $tag =~ $re ]]; 
