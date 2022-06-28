@@ -35,7 +35,7 @@ jobs:
         id: patch
         run: |
           re="/(\d+)\D*\z"
-          tag=${{ steps.tags.outputs.tag }}
+          tag="${{ steps.tags.outputs.tag }}"
           if 
             [[ $tag =~ $re ]]; 
             then echo ${BASH_REMATCH[0]}; 
