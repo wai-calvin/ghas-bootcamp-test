@@ -17,6 +17,9 @@ jobs:
       - name: git tag
         run: git tag
 
+      - name: gitref 
+        run: echo ${GITHUB_REF}
+
       - name: Set Output
         id: tags
         run: echo ::set-output name=tag::${GITHUB_REF#refs/tags/*/}
