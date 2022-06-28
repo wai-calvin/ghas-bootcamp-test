@@ -12,9 +12,12 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
+      - name: git tag
+        run: git tag
+
       - name: Set Output
         id: tags
-        run: echo ::set-output name=tag::${GITHUB_REF#refs/tags/*}
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*}
 
       - name: Check Tag 
         env:
