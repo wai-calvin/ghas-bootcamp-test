@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
+        with:
+          depth: 0
 
       - name: Increment
         uses: ./.github/actions/action.yml
