@@ -3,17 +3,17 @@ const github = require('@actions/github');
 
 async function action() {
     
-    console.log(github.context);
-    // const myToken = core.getInput('myToken');
-    const octokit = github.getOctokit("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");
+    // console.log(github.context);
+    const myToken = core.getInput('myToken');
+    const octokit = github.getOctokit(myToken);
 
-    const tags = await octokit.rest.repos.listTags({
-        owner: "wai-calvin",
-        repo: "ghas-bootcamp-test",
-    });
+    // const tags = await octokit.rest.repos.listTags({
+    //     owner: "wai-calvin",
+    //     repo: "ghas-bootcamp-test",
+    // });
 
-    console.log(tags);
-    console.log(tags.data[0].name);
+    // console.log(tags);
+    // console.log(tags.data[0].name);
     const recentGitTag = tags.data[0].name;
 
     if(!recentGitTag.includes("-rc")) {
@@ -22,10 +22,10 @@ async function action() {
         console.log(newPatchNum);
 
         const createTag = await octokit.request('POST /repos/{owner}/{repo}/git/refs', {
-            owner: 'wai-calvin',
-            repo: 'ghas-bootcamp-test',
+            owner: "wai-calvin",
+            repo: github.context.payload.repository.name,
             ref: `refs/tags/v1.0.${newPatchNum}-rc0`,
-            sha: '6c96128a2fcf5006210a7d4db238e95713de6abf'
+            sha: github.context.payload.head_commit.id
         });
         console.log(createTag);
     }
@@ -40,9 +40,9 @@ async function action() {
 
         const createTag = await octokit.request('POST /repos/{owner}/{repo}/git/refs', {
             owner: 'wai-calvin',
-            repo: 'ghas-bootcamp-test',
+            repo: github.context.payload.repository.name,
             ref: `refs/tags/${currentVersion}-rc${newRC}`,
-            sha: '6c96128a2fcf5006210a7d4db238e95713de6abf'
+            sha: github.context.payload.head_commit.id
         });
         console.log(createTag);
 

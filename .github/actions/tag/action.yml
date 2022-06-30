@@ -1,5 +1,9 @@
 name: 'Tag Increment'
 description: 'Incrementing git tag'
+inputs:
+  token: 
+    description: 'github token'
+    required: true
 runs:
   using: 'node16'
   main: 'tag-action.js'
