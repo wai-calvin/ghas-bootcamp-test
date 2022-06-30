@@ -2,4 +2,4 @@ name: 'Tag Increment'
 description: 'Incrementing git tag'
 runs:
   using: 'node16'
-  main: 'tag-action.js'
+  main: './tag-action.js'
