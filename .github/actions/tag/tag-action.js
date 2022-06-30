@@ -4,7 +4,7 @@ const github = require('@actions/github');
 async function action() {
     
     // console.log(github.context);
-    const myToken = core.getInput('myToken');
+    const myToken = core.getInput('token');
     const octokit = github.getOctokit(myToken);
 
     // const tags = await octokit.rest.repos.listTags({
