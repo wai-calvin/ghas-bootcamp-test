@@ -7,10 +7,10 @@ async function action() {
     const myToken = core.getInput('token');
     const octokit = github.getOctokit(myToken);
 
-    // const tags = await octokit.rest.repos.listTags({
-    //     owner: "wai-calvin",
-    //     repo: "ghas-bootcamp-test",
-    // });
+    const tags = await octokit.rest.repos.listTags({
+        owner: "wai-calvin",
+        repo: github.context.payload.repository.name,
+    });
 
     // console.log(tags);
     // console.log(tags.data[0].name);
