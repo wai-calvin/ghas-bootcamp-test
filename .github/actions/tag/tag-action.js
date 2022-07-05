@@ -52,7 +52,13 @@ async function action() {
 
     else {
         const version = recentGitTag.split('-', 1);
-        console.log(version);
+        const createTag = await octokit.request('POST /repos/{owner}/{repo}/git/refs', {
+            owner: 'wai-calvin',
+            repo: github.context.payload.repository.name,
+            ref: `refs/tags/${version}`,
+            sha: github.context.payload.head_commit.id
+        });
+        console.log(createTag);
     }
     // console.log(createTag);
 
