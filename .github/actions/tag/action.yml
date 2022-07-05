@@ -4,6 +4,10 @@ inputs:
   token: 
     description: 'github token'
     required: true
+  release-candidate:
+    description: 'determine release candidate'
+    required: true
+    default: "false"
 runs:
   using: 'node16'
   main: 'tag-action.js'

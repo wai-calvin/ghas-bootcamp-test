@@ -13,4 +13,7 @@ jobs:
           run: npm install
         - uses: ./.github/actions/tag
           with:
-            token: ${{ secrets.PAT }}
+            # token: ${{ secrets.PAT }}
+            token: ${{ secrets.GITHUB_TOKEN }}
+            release-candidate: "false"
+
