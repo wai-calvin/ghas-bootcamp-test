@@ -51,7 +51,7 @@ async function action() {
     }
 
     else {
-        const version = recentGitTag.slice(-1);
+        const version = recentGitTag.split('-', 1);
         console.log(version);
     }
     // console.log(createTag);
