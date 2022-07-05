@@ -13,12 +13,12 @@ async function action() {
         repo: github.context.payload.repository.name,
     });
 
+    const recentGitTag = tags.data[0].name;
     const version = recentGitTag.split('-', 1);
     console.log(version);
 
     // console.log(tags);
     // console.log(tags.data[0].name);
-//     const recentGitTag = tags.data[0].name;
 
 //     if(releaseCandidate == "true") {
 //         if(!recentGitTag.includes("-rc")) {
