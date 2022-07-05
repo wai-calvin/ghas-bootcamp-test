@@ -11,8 +11,7 @@ async function action() {
 
     const tags = await octokit.rest.repos.listTags({
         owner: "wai-calvin",
-        // repo: github.context.payload.repository.name,
-        repo: "ghas-bootcamp-test"
+        repo: github.context.payload.repository.name
     });
 
     console.log(tags);
