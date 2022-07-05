@@ -17,7 +17,7 @@ async function action() {
     //Variable for storing the most recent git tag
     const recentGitTag = tags.data[0].name;
 
-    console.log(github.context);
+    console.log(github.context.payload.repository.owner);
 
     // if(releaseCandidate == "true") {
     //     if(!recentGitTag.includes("-rc")) {
