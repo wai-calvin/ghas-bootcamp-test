@@ -35,10 +35,7 @@ async function action() {
     
         else {
             //Grab 
-            // const oldRCNum = recentGitTag.slice(-1);
-            console.log(recentGitTag);
-            const oldPatchNum = recentGitTag.match(/\d+$/);
-            console.log("oldPatchNum = " + oldPatchNum);
+            const oldRCNum = recentGitTag.match(/\d+$/);
             const newRCNum = Number(oldRCNum)+1;
             const gitTagVersion = recentGitTag.split('-', 1);
     
