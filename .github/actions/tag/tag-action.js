@@ -6,22 +6,29 @@ async function action() {
     // console.log(github.context);
     const myToken = core.getInput('token');
     const octokit = github.getOctokit(myToken);
-    // const octokit = github.getOctokit('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');
     const releaseCandidate = core.getInput('release-candidate');
 
     const tags = await octokit.rest.repos.listTags({
         owner: "wai-calvin",
+        // repo: "ghas-bootcamp-test"
         repo: github.context.payload.repository.name
     });
 
     console.log(tags);
     const recentGitTag = tags.data[0].name;
-    console.log("recent git tag: " + recentGitTag);
+    // console.log("recent git tag: " + recentGitTag);
 
+    // if(!recentGitTag.includes("-rc")) {
+    //     const oldPatchNum = recentGitTag.split('.').pop();
+    //     console.log("version nums = " + oldPatchNum);
+    //     // const oldPatchNum = recentGitTag.slice(-1);
+    //     const newPatchNum =oldPatchNum+1;
+    //     console.log(newPatchNum);
+    // }
 
     if(releaseCandidate == "true") {
         if(!recentGitTag.includes("-rc")) {
-            const oldPatchNum = recentGitTag.slice(-1);
+            const oldPatchNum = recentGitTag.split('.').pop();
             const newPatchNum = Number(oldPatchNum)+1;
             console.log(newPatchNum);
     
