@@ -15,5 +15,5 @@ jobs:
           with:
             # token: ${{ secrets.PAT }}
             token: ${{ secrets.GITHUB_TOKEN }}
-            release-candidate: "true"
+            release-candidate: "false"
 
