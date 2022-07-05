@@ -30,7 +30,7 @@ async function action() {
     
         else {
             const oldRCNum = recentGitTag.slice(-1);
-            const newRCNum = Number(oldRC)+1;
+            const newRCNum = Number(oldRCNum)+1;
             const gitTagVersion = recentGitTag.split('-', 1);
     
             const createTag = await octokit.request('POST /repos/{owner}/{repo}/git/refs', {
