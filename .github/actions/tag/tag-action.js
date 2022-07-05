@@ -3,34 +3,21 @@ const github = require('@actions/github');
 
 async function action() {
     
-    // console.log(github.context);
     const myToken = core.getInput('token');
     const octokit = github.getOctokit(myToken);
     const releaseCandidate = core.getInput('release-candidate');
 
     const tags = await octokit.rest.repos.listTags({
         owner: "wai-calvin",
-        // repo: "ghas-bootcamp-test"
         repo: github.context.payload.repository.name
     });
 
-    console.log(tags);
     const recentGitTag = tags.data[0].name;
-    // console.log("recent git tag: " + recentGitTag);
-
-    // if(!recentGitTag.includes("-rc")) {
-    //     const oldPatchNum = recentGitTag.split('.').pop();
-    //     console.log("version nums = " + oldPatchNum);
-    //     // const oldPatchNum = recentGitTag.slice(-1);
-    //     const newPatchNum =oldPatchNum+1;
-    //     console.log(newPatchNum);
-    // }
 
     if(releaseCandidate == "true") {
         if(!recentGitTag.includes("-rc")) {
             const oldPatchNum = recentGitTag.split('.').pop();
             const newPatchNum = Number(oldPatchNum)+1;
-            console.log(newPatchNum);
     
             const createTag = await octokit.request('POST /repos/{owner}/{repo}/git/refs', {
                 owner: "wai-calvin",
@@ -38,36 +25,33 @@ async function action() {
                 ref: `refs/tags/v1.0.${newPatchNum}-rc0`,
                 sha: github.context.payload.head_commit.id
             });
-            console.log(createTag);
+            console.log(`Created tag ${createTag.data.ref} for commit ${createTag.data.object.sha}`);
         }
     
         else {
-            const oldRC = recentGitTag.slice(-1);
-            const newRC = Number(oldRC)+1;
-            console.log(newRC);
-    
-            const currentVersion = recentGitTag.split('-', 1);
-            console.log(currentVersion);
+            const oldRCNum = recentGitTag.slice(-1);
+            const newRCNum = Number(oldRC)+1;
+            const gitTagVersion = recentGitTag.split('-', 1);
     
             const createTag = await octokit.request('POST /repos/{owner}/{repo}/git/refs', {
                 owner: 'wai-calvin',
                 repo: github.context.payload.repository.name,
-                ref: `refs/tags/${currentVersion}-rc${newRC}`,
+                ref: `refs/tags/${gitTagVersion}-rc${newRCNum}`,
                 sha: github.context.payload.head_commit.id
             });
-            console.log(createTag);
+            console.log(`Created tag ${createTag.data.ref} for commit ${createTag.data.object.sha}`);
         }
     }
 
     else {
-        const version = recentGitTag.split('-', 1);
+        const gitTagVersion = recentGitTag.split('-', 1);
         const createTag = await octokit.request('POST /repos/{owner}/{repo}/git/refs', {
             owner: 'wai-calvin',
             repo: github.context.payload.repository.name,
-            ref: `refs/tags/${version}`,
+            ref: `refs/tags/${gitTagVersion}`,
             sha: github.context.payload.head_commit.id
         });
-        console.log(createTag);
+        console.log(`Created tag ${createTag.data.ref} for commit ${createTag.data.object.sha}`);
     } 
 }
 
