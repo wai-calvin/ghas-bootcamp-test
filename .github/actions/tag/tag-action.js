@@ -61,4 +61,5 @@ async function action() {
         console.log(`Created tag ${createTag.data.ref} for commit ${createTag.data.object.sha}`);
     }
 }
+
 action();
