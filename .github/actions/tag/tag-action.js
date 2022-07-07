@@ -45,7 +45,8 @@ async function action() {
                 ref: `refs/tags/${gitTagVersion}-rc${newRCNum}`,
                 sha: github.context.payload.head_commit.id
             });
-            console.log(`Created tag ${createTag.data.ref} for commit ${createTag.data.object.sha}`);
+            // console.log(`Created tag ${createTag.data.ref} for commit ${createTag.data.object.sha}`);
+            core.notice(`Created tag ${createTag.data.ref} for commit ${createTag.data.object.sha}`)
         }
     }
 
